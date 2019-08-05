@@ -1,0 +1,1 @@
+grep -Flf wordfile.txt -r en/
