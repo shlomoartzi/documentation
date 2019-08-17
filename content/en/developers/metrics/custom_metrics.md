@@ -183,26 +183,28 @@ To obtain the maximum `age` in the state of New York, you can reaggregate the ti
 #### Distributions with percentile aggregations
 After submitting a distribution metric to Datadog, you have the option to add percentile aggregations to a distribution with the Distributions UI in-app. Distributions with percentile aggregations are counted differently compared to the metric types listed above since percentiles are not mathematically reaggregatable.
 
-Suppose you are interested in measuring the *median* `age` in the state of New York where the `age` distribution metric is tagged with `city` and `state`. 
+Suppose you are interested in measuring the *median* `age` in the state of New York where `age` is a distribution metric. You've created  one percentile aggregation rule for `age` with the following applied tags: `city` and `state` tags 
 
-|  | Values in 10s flush interval | Sum | Count | Min | Max | Avg | p50 | p75 | p90 | p95 | p99 |
+|  | Values for the `age` distribution metric in 10s flush interval | Sum | Count | Min | Max | Avg | p50 | p75 | p90 | p95 | p99 |
 |---------------|------------------------------|-----|-------|-----|-----|-----|-----|-----|-----|-----|-----|
 | Rochester, NY | 23,33,55,41,36,12,66 | 266 | 7 | 12 | 66 | 38 | 23 | 55 | 66 | 66 | 66 |
-| New York, NY | 18,26,31,29,40,23,36 | 203 | 7 | 18 | 40 | 29 | 29 | 36 | 40 | 40 | 40 | 
+| New York, NY | 18,26,31,29,40,23,36 | 203 | 7 | 18 | 40 | 29 | 29 | 36 | 40 | 40 | 40 |  
 
 Percentiles are NOT reaggregatable -- you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)). 
 
-Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations: 
+Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. 
+
+In the New York example, you have the following potentially queryable tag value combinations: 
  * Rochester, (`null` state)
  * New York, (`null` state)
  * (`Null` city), NY
  * Rochester, NY
  * New York, NY
- * (`Null` city), (`null` state) -- equivalent to * {all time series}
+ * (`Null` city), (`null` state) -- equivalent to * {all datapoints}
 
 There are three potentially queryable values for the `city` tag: {Rochester, New York, `null`} and two values for the `state` tag: {NY, `null`}.
 
-The total number of custom metrics emitted from the `age` distribution metric WITH percentile aggregations is:
+The total number of custom metrics emitted from the `age` distribution metric with the one percentile aggregation rule is:
 
 {{< img src="/developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
 
