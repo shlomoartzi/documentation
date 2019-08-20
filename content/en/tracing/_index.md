@@ -30,6 +30,8 @@ disable_toc: true
 
  Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and we can show you systematic data about precisely what is happening to this request.
 
+ Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards to detailed traces of individual requests. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about the request.
+
 ## Overview
 
 {{< whatsnext desc="This section includes the following topics:">}}
