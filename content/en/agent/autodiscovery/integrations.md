@@ -277,9 +277,9 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.check_names: '["redisdb"]'
-    ad.datadoghq.com/redis.init_configs: '[{}]'
-    ad.datadoghq.com/redis.instances: |
+    ad.datadoghq.com/redis_container_name.check_names: '["redisdb"]'
+    ad.datadoghq.com/redis_container_name.init_configs: '[{}]'
+    ad.datadoghq.com/redis_container_name.instances: |
       [
         {
           "host": "%%host%%",
@@ -292,7 +292,7 @@ metadata:
     name: redis
 spec:
   containers:
-    - name: redis
+    - name: redis_container_name
       image: httpd
       ports:
         - containerPort: 80
@@ -447,9 +447,9 @@ kind: Pod
 metadata:
   name: apache
   annotations:
-    ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
-    ad.datadoghq.com/apache.init_configs: '[{},{}]'
-    ad.datadoghq.com/apache.instances: |
+    ad.datadoghq.com/apache_container_name.check_names: '["apache","http_check"]'
+    ad.datadoghq.com/apache_container_name.init_configs: '[{},{}]'
+    ad.datadoghq.com/apache_container_name.instances: |
       [
         [
           {
@@ -474,7 +474,7 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache
+    - name: apache_container_name
       image: httpd
       ports:
         - containerPort: 80
